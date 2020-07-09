@@ -1,0 +1,81 @@
+Thought Process behind this flow:
+
+I started practising Tableau Prep last year in 2019 but couldn't continue due to some reasons.
+
+Today on 9-July-2020, I decided to start it again from the scratch; for which I had to create a folder to store each week's files:
+	* Input (excel or csv)
+	* Output (excel or csv or .tde)
+	* Flow file (.tfl)
+	* Screenshot of the flow
+
+Also, I decided to keep backup of my work via GitHub repository (I saw many people doing this for Prep)!
+
+There is a catch that GitHub does not create/replicate the blank folders. As a solution I had to create Step #8 in Tablea Prep flow. 
+
+The best way to create multiple folders at a time is the CMD option (yeah, the old school one)! The challenge was I needed the folder name in following format:
+
+FORMAT --> YYYY Week XX- Topic of the week - where YYYY stands for year and XX for week number.
+
+The webpage https://preppindata.blogspot.com/p/the-challenge-index.html has listed all the challenges and their solutions till date. I copied the whole text in an excel (Raw File), added 2019 and 2020 as the year column and the rest of the cleaning was done in Tableau Prep.
+
+Now the steps executed in Prep :)
+
+1. Enabled data interpretor option in Prep
+
+2. Changed Year data type to String
+
+3. Excluded Year = NULL
+
+4. Excluded Challenge = NULL
+
+5. New field 'Challenge_' to remove the 'Challenge','Solution',' ' and '?' from the Challenge column
+
+	REPLACE(
+		REPLACE(
+			REPLACE(
+				REPLACE(
+					REPLACE([Challenge],"Challenge","")
+    				,"Solution","")
+				,"  ","")
+    		,":","-")
+    	,"?","")
+
+6. New field 'New Challenge' to get the value in the desired FORMAT which was mentioned above.
+
+	[Year] + " " +
+
+	if FINDNTH([Challenge_],"-",1) = 7 THEN
+
+		REPLACE([Challenge_],MID([Challenge_],6,1),"0"+MID([Challenge_],6,1))
+    
+	ELSE
+
+		[Challenge_]
+
+	END
+
+7. New field 'Make Directory' to create directories via CMD option
+	
+	"md" + ' "' + [New Challenge] + '" '
+
+
+8. New field 'Create New File' to copy README.md file from the root directory to each folder to be created with the help of 'Make Directory' values
+
+	"copy README.md " + ' "' + [New Challenge] + '" '
+
+9. Removed the following fields:
+	* Challenge_
+	* Year
+	* Challenge
+
+10. Ran the flow and created the csv file 'Clean Output'
+
+11. Created the folder by copying all values from 'Make Directory' column and pasting it in CMD console.
+
+12. Copied the README.md by copying all values from 'Create New File' column and pasting it in CMD console.
+
+As the folders were created successfully and they all had at least 1 file inside them, I was able to commit my changes to GitHub repository :)
+
+
+Regards,
+Mohit Panse

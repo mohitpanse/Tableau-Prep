@@ -16,7 +16,8 @@ The best way to create multiple folders at a time is the CMD option (yeah, the o
 
 FORMAT --> YYYY Week XX- Topic of the week - where YYYY stands for year and XX for week number.
 
-The webpage https://preppindata.blogspot.com/p/the-challenge-index.html has listed all the challenges and their solutions till date. I copied the whole text in an excel (Raw File), added 2019 and 2020 as the year column and the rest of the cleaning was done in Tableau Prep.
+The webpage https://preppindata.blogspot.com/p/the-challenge-index.html has listed all the challenges and their solutions till date.
+I copied the whole text in an excel (Raw File), added 2019 and 2020 as the year column and the rest of the cleaning was done in Tableau Prep.
 
 Now the steps executed in Prep :)
 

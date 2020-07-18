@@ -6,6 +6,7 @@ The first challenge was published on February 13, 2019 as Week 1.
 
 
 What does the Tableau Prep Builder workspace consists of?
+
 (A) Connections pane: where you connect to your data sources, and three coordinated areas that help you interact with and explore your data.
 
 (B) Flow pane: A visual representation of your operation steps as you prepare your data. This is where you add steps to build your flow.
